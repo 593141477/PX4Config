@@ -87,7 +87,7 @@ fi\n\
     updateCodeAfterSepLine(QString(tpl).arg(mCopterId, mCopterName),QString("ROMFS/px4fmu_common/init.d/rc.autostart"));
 }
 
-void config_file::updateRCdotMC_Apps()
+void config_file::updateRCdotMC_Apps(QString CopterType, bool remove)
 {
     const char* tpl =
 "if [ $MIXER == %2 ]\n\
@@ -96,5 +96,9 @@ void config_file::updateRCdotMC_Apps()
 fi\n\
 ";
 
-    updateCodeAfterSepLine(QString(tpl).arg(mCopterId, mCopterName),QString("ROMFS/px4fmu_common/init.d/rc.mc_apps"));
+    QString name = QString("ROMFS/px4fmu_common/init.d/rc.%1_apps").arg(CopterType);
+    updateCodeAfterSepLine(
+                remove ? "" : QString(tpl).arg(mCopterId, mCopterName),
+                name
+                );
 }

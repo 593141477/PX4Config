@@ -13,7 +13,7 @@ public:
 //    ~config_file();
 
     void updateRCdotAutoStart();
-    void updateRCdotMC_Apps();
+    void updateRCdotMC_Apps(QString CopterType, bool remove);
     void createMixerFile(QString MixerContent);
     void createPWMScript(QString PWMContent);
     void createStartScript(QString ScriptContent);

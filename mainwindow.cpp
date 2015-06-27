@@ -76,7 +76,7 @@ void MainWindow::on_save_button_clicked()
 {
     QString message;
     QString PX4Dir;
-    QString copterName, copterType;
+    QString copterName, copterType, copterTypeOther;
     int copterId;
     bool validId;
 
@@ -86,6 +86,7 @@ void MainWindow::on_save_button_clicked()
     copterId = ui->copter_id->text().toInt(&validId);
     copterName = ui->copter_name->text();
     copterType = ui->copter_type->itemData(ui->copter_type->currentIndex()).toString();
+    copterTypeOther = ui->copter_type->itemData(1 - ui->copter_type->currentIndex()).toString();
 
     if(PX4Dir.isEmpty()){
         QMessageBox::warning(this, "Warning", "PX4 directory is empty");
@@ -108,7 +109,8 @@ void MainWindow::on_save_button_clicked()
         file.createStartScript(buildAutoStartScript(copterName, copterType));
         file.createMixerFile(buildMixerScript());
         file.updateRCdotAutoStart();
-        file.updateRCdotMC_Apps();
+        file.updateRCdotMC_Apps(copterType, false);
+        file.updateRCdotMC_Apps(copterTypeOther, true);
         message += "Script file updated.";
     }catch(QString *s){
         message += s->toStdString().c_str();
