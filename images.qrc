@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/global">
+        <file alias="skyworks_logo">skyworks.jpg</file>
+        <file>skyworks_large.png</file>
+        <file alias="icon">PX4Config.ico</file>
+    </qresource>
+</RCC>
